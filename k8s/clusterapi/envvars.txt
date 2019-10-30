@@ -1,0 +1,22 @@
+# vCenter config/credentials
+export VSPHERE_SERVER='10.56.224.4'                # (required) The vCenter server IP or FQDN
+export VSPHERE_USERNAME='cloudadmin@vmc.local'  # (required) The username used to access the remote vSphere endpoint
+export VSPHERE_PASSWORD='XXXXXXX'  # (required) The password used to access the remote vSphere endpoint
+
+# vSphere deployment configs
+export VSPHERE_DATACENTER='SDDC-Datacenter'         # (required) The vSphere datacenter to deploy the management cluster on
+export VSPHERE_DATASTORE='WorkloadDatastore'         # (required) The vSphere datastore to deploy the management cluster on
+export VSPHERE_NETWORK='EMEA-VMC-TEST-04-DHCP'               # (required) The VM network to deploy the management cluster on
+export VSPHERE_RESOURCE_POOL='/SDDC-Datacenter/host/Cluster-1/Resources/Compute-ResourcePool'            # (required) The vSphere resource pool for your VMs
+export VSPHERE_FOLDER='adess'                          # (optional) The VM folder for your VMs, defaults to the root vSphere folder if not set.
+export VSPHERE_TEMPLATE='ubuntu-1804-kube-v1.15.4'  # (required) The VM template to use for your management cluster.
+export VSPHERE_DISK_GIB='50'                        # (optional) The VM Disk size in GB, defaults to 20 if not set
+export VSPHERE_NUM_CPUS='2'                         # (optional) The # of CPUs for control plane nodes in your management cluster, defaults to 2 if not set
+export VSPHERE_MEM_MIB='2048'                       # (optional) The memory (in MiB) for control plane nodes in your management cluster, defaults to 2048 if not set
+export SSH_AUTHORIZED_KEY='ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJAV04oP0erZlfiK/ZXgTKs7LhVNc+Od5SPl98PkviU3lUsgkt5tavyyR5Qbxqs+r6zbZKf1rsd+nyC0kPwRUicn+I2MMLY8D/Q4djNPEEnZJ6Qw4SJIQn/Ygpps6CsvGrccYAC7cKkHWGaWpiKNA02gMd1NeQpvP1+NjjBigrL3rHNbLlbatU1xrjxC89xmFp2ntXCtPSGSTFy6GhU5MEFiV2hck1vLzZ2uPevTBH4UZn5s+agGKWGlvsX/yBWprepZIAB+nmSWsNjAZMPkE6+n9UODdkmIg4RFXgVzhCeH9swQsZ5nJiKq0IevMxwW26Fth8blBs5qXBhr+It/73 vmware@adess-jh'      # (optional) The public ssh authorized key on all machines in this cluster
+
+# Kubernetes configs
+export KUBERNETES_VERSION='1.15.4'        # (optional) The Kubernetes version to use, defaults to 1.15.3
+export SERVICE_CIDR='100.64.0.0/13'       # (optional) The service CIDR of the management cluster, defaults to "100.64.0.0/13"
+export CLUSTER_CIDR='100.96.0.0/11'       # (optional) The cluster CIDR of the management cluster, defaults to "100.96.0.0/11"
+export SERVICE_DOMAIN='vmc.local'     # (optional) The k8s service domain of the management cluster, defaults to "cluster.local"

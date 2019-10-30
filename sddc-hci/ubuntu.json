@@ -1,0 +1,42 @@
+{
+    "DiskProvisioning": "thin",
+    "IPAllocationPolicy": "dhcpPolicy",
+    "IPProtocol": "IPv4",
+    "PropertyMapping": [
+      {
+        "Key": "instance-id",
+        "Value": "id-ovf"
+      },
+      {
+        "Key": "hostname",
+        "Value": "ubuntu-template"
+      },
+      {
+        "Key": "seedfrom",
+        "Value": ""
+      },
+      {
+        "Key": "public-keys",
+        "Value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCatMOdPQDNoY7U43G9pc/jCBLiJuDFvVWPp0UaUXdJfLlVKYxvtvzWfPjnBNrRt0oyFS2vPlPUGn4XrjPOgTyMHo7xQrMb7ELe6YQPTT0vXKwbV1B+U3ldOgqhV/RTuEkL+VrZcPDiss1T7chM0eo+44aWAxx4t1JpU09j8lH9NFP1Jl4eb50ZRQtlGGcgZzS3eTuD5eqruBx/RQHYXKHkc1ynfGA0iv/XxaEXwoLYleBdZVyZYwLQHSuaEXOvuH1Cj/AK2VT70ciBZKlklwRrC3idSLhEmqngalL0PBKhkW2mXJLALkvELHIrfOeyaVEN4Clrz3eb2ATnflfnjfTt root@adess-jh"
+      },
+      {
+        "Key": "user-data",
+        "Value": ""
+      },
+      {
+        "Key": "password",
+        "Value": "VMware1!"
+      }
+    ],
+    "NetworkMapping": [
+      {
+        "Name": "VM Network",
+        "Network": "CORP"
+      }
+    ],
+    "MarkAsTemplate": false,
+    "PowerOn": true,
+    "InjectOvfEnv": false,
+    "WaitForIP": false,
+    "Name": "ubuntu-template"
+  }

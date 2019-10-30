@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-pass
+  labels:
+    app: tito
+  type: Opaque
+  data:
+  password: Vk13YXJlMSE=
+  # Password created like this: echo -n 'VMware1!' | base64
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: titofe
+  labels:
+    name: tito-fe
+    version: "latest"
+    app: tito
+    tier: frontend
+    stage: prod
+    namespace: tito-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: tito-fe
+      version: v1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tito
+        type: tito-fe
+        version: v1
+        tier: frontend
+    spec:
+      containers:
+        - name: tito
+          image: adess/vmc-demo-k8s:v5
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 80
+          env:
+          - name: TITO_VERSION
+            value: V2
+          - name: TITO_SQL_SERVICE_SERVICE_HOST # The IP of the Database VM which was setup
+            value: 10.72.30.68
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: titofe-service
+  labels:
+    app: tito
+    tier: frontend
+    stage: prod
+    namespace: tito-app
+spec:
+  ports:
+  - name: http
+    port: 80               
+  selector:                
+    type: tito-fe
+    tier: frontend
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.72.30.31

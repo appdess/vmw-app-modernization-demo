@@ -1,0 +1,27 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: csi.vsphere.vmware.com
+parameters:
+  datastoreurl: "ds:///vmfs/volumes/vsan:e4fdeb26bf93402f-956989e5b4bf358e/" #Optional Parameter
+  storagepolicyname: "vSAN Default Storage Policy"  #Optional Parameter
+  fstype: "ext4" #Optional Parameter
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-claim
+  namespace: monitoring
+spec:
+  storageClassName: fast
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Gi
+---
+
