@@ -2,8 +2,6 @@
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
-#
-ssh capv@172.30.118.24 /home/capv/install-docker.sh
-ssh capv@172.30.118.32 /home/capv/install-docker.sh
-ssh capv@172.30.118.25 /home/capv/install-docker.sh
-ssh capv@172.30.118.37 /home/capv/install-docker.sh
+# run app as single container...
+docker run -d --restart unless-stopped -p 80:80 adess/vmc-demo-k8s:v5
+

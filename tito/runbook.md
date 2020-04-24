@@ -1,9 +1,27 @@
 # Datacenter Migration
-- CommuteAnalytics needs to move out of the Datacenter and decides to migrate to VMC after successful POC
-- VMware HCX was deployed in the on-prem environment to move their workloads Hybridity for Workloads and therefore the VMs will be moved
-
-
+- CommuteAnalytics decided for VMC
+- VMC Console 
+- VMware HCX was deployed and leveraged to move the Application
 - The Company is facing issue with the availability of their applicaitons during peak times
+-  Application Architecture picture
+# build docker image
+docker build .
+docker tag XXXXX vmc-demo-k8s:v3
+docker push adess/vmc-demo-k8s:v3
+
+bat tito-lb.yaml
+kubectl apply -f tito-lb.yaml
+
+bat tito-deployment.yaml
+kubectl apply -f tito-deployment.yaml
+
+kubectl get pods -n tito-app
+
+kubectl get svc -n tito-app
+
+kubectl autoscale deployment titofe --cpu-percent=50 --min=2 --max=30 -n tito-app
+kubectl scale deployment titofe --replicas=10 -n tito-app
+kubectl get pods -n tito-app
 
 # Show Essential PKS Cluster Setup on VMC
 - The VMs are now fully migrated to the cloud and serving the website (DNS Entry for frontend!)
@@ -28,8 +46,6 @@
 # Edit hosts file to point to IP
 10.72.30.31     CommuteAnalytics.com
 sudo killall -HUP mDNSResponder
-
-
 
 
 # Make use of K8s termonoligy and use the Autoscaler for the deployment

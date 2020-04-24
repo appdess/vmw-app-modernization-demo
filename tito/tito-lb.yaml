@@ -24,4 +24,4 @@ spec:
 status:
   loadBalancer:
     ingress:
-    - ip: 10.72.30.31
+    - ip: 172.30.118.239

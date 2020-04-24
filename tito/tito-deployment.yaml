@@ -47,8 +47,8 @@ spec:
           env:
           - name: TITO_VERSION
             value: V2
-          - name: TITO_SQL_SERVICE_SERVICE_HOST # The IP of the Database VM which was setup
-            value: 10.72.30.68
+          - name: TITO_SQL_SERVICE_SERVICE_HOST # DB-IP
+            value: 172.30.118.40
           - name: POD_NAME
             valueFrom:
               fieldRef:

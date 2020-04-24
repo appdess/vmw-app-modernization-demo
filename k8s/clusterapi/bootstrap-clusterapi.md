@@ -1,4 +1,44 @@
 
+Create files:
+docker run --rm \
+  -v "$(pwd)":/out \
+  -v "$(pwd)/envvars.txt":/envvars.txt:ro \
+  gcr.io/cluster-api-provider-vsphere/release/manifests:latest \
+  -c workload-cluster-04
+
+
+  # Export kubeconfig to mgmt-cluster
+  export KUBECONFIG=./out/management-cluster/kubeconfig
+
+  # apply files
+  kubectl apply -f ./out/workload-cluster-05/cluster.yaml -f ./out/workload-cluster-05/controlplane.yaml -f ./out/workload-cluster-05/machinedeployment.yaml
+
+  kubectl get secret workload-cluster-04-kubeconfig -o=jsonpath='{.data.value}' | { base64 -d 2>/dev/null || base64 -D; } >./out/workload-cluster-04/kubeconfig
+
+    kubectl get secret workload-cluster-05-kubeconfig -o=jsonpath='{.data.value}' | { base64 -d 2>/dev/null || base64 -D; } >./out/workload-cluster-05/kubeconfig
+
+export KUBECONFIG=./out/workload-cluster-04/kubeconfig
+kubectl apply -f ./out/workload-cluster-04/addons.yaml
+
+export KUBECONFIG=./out/workload-cluster-05/kubeconfig
+kubectl apply -f ./out/workload-cluster-05/addons.yaml
+
+
+# with 02:
+docker run --rm \
+  -v "$(pwd)":/out \
+  -v "$(pwd)/envvars.txt":/envvars.txt:ro \
+  gcr.io/cluster-api-provider-vsphere/release/manifests:latest \
+  -c workload-cluster-02
+
+    kubectl apply -f ./out/workload-cluster-02/cluster.yaml -f ./out/workload-cluster-02/controlplane.yaml -f ./out/workload-cluster-02/machinedeployment.yaml
+
+
+
+
+
+
+
 ### Create Kind Cluster:
 kind create cluster --name clusterapiexport KUBECONFIG="$(kind get kubeconfig-path --name="clusterapi")"
 kubectl create -f https://github.com/kubernetes-sigs/cluster-api/releases/download/v0.2.3/cluster-api-components.yaml

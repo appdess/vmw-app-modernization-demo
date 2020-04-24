@@ -36,7 +36,7 @@ docker run --rm \
 kubectl apply -f ./out/workload-cluster-03/cluster.yaml -f ./out/workload-cluster-03/controlplane.yaml -f ./out/workload-cluster-03/machinedeployment.yaml
 
 # get kubeconfig
-kubectl get secret workload-cluster-03-kubeconfig -o=jsonpath='{.data.value}' | { base64 -d 2>/dev/null || base64 -D; } >./out/workload-cluster-03/kubeconfig
+x
 
 
 

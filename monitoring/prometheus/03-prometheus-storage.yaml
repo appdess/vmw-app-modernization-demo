@@ -17,7 +17,7 @@ metadata:
   name: prometheus-claim
   namespace: monitoring
 spec:
-  storageClassName: fast
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
